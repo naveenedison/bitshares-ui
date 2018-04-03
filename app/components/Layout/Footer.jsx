@@ -46,7 +46,8 @@ class Footer extends React.Component {
         return (
             nextProps.dynGlobalObject !== this.props.dynGlobalObject ||
             nextProps.backup_recommended !== this.props.backup_recommended ||
-            nextProps.rpc_connection_status !== this.props.rpc_connection_status ||
+            nextProps.rpc_connection_status !==
+                this.props.rpc_connection_status ||
             nextProps.synced !== this.props.synced ||
             nextState.showNodesPopup !== this.state.showNodesPopup
         );
@@ -152,9 +153,7 @@ class Footer extends React.Component {
         let getNode = this.getNode.bind(this);
         let currentNodeIndex = this.getCurrentNodeIndex.call(this);
 
-        let activeNode = getNode(
-            nodes[currentNodeIndex] || nodes[0]
-        );
+        let activeNode = getNode(nodes[currentNodeIndex] || nodes[0]);
 
         if (activeNode.url == autoSelectAPI) {
             let nodeUrl = props.activeNode;
@@ -268,7 +267,7 @@ class Footer extends React.Component {
                             </span>
                         ) : null}
                         {block_height ? (
-                            <div 
+                            <div
                                 onMouseEnter={() => {
                                     this.setState({showNodesPopup: true});
                                 }}
@@ -277,46 +276,7 @@ class Footer extends React.Component {
                                 }}
                                 className="grid-block shrink"
                             >
-                                <div style={{position: "relative"}}>
-                                    <div className="footer-status">
-                                        {!connected ? (
-                                            <span className="warning">
-                                                <Translate content="footer.disconnected" />
-                                            </span>
-                                        ) : (
-                                            <span className="success">
-                                                {activeNode.name}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <div className="footer-block">
-                                        <span>
-                                            <span className="footer-block-title">
-                                                <Translate content="footer.latency" />
-                                            </span>
-                                            &nbsp;{!connected
-                                                ? "-"
-                                                : !activeNode.ping
-                                                    ? "-"
-                                                    : activeNode.ping +
-                                                      "ms"}&nbsp;/&nbsp;
-                                            <span className="footer-block-title">
-                                                <Translate content="footer.block" />
-                                            </span>
-                                            &nbsp;#{block_height}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className="grid-block">
-                                    <div
-                                        className="introjs-launcher"
-                                        onClick={() => {
-                                            this.launchIntroJS();
-                                        }}
-                                    >
-                                        <Translate content="global.help" />
-                                    </div>
-                                </div>
+                                <div style={{position: "relative"}} />
                             </div>
                         ) : (
                             <div className="grid-block shrink">
@@ -325,22 +285,24 @@ class Footer extends React.Component {
                         )}
                     </div>
                 </div>
-                <div 
+                <div
                     onMouseEnter={() => {
                         this.setState({showNodesPopup: true});
                     }}
                     onMouseLeave={() => {
                         this.setState({showNodesPopup: false});
                     }}
-                    className="node-access-popup" 
+                    className="node-access-popup"
                     style={{display: this.state.showNodesPopup ? "" : "none"}}
                 >
                     <AccessSettings
                         nodes={this.props.defaults.apiServer}
                         popup={true}
                     />
-                    <div style={{paddingTop: 15}} >
-                        <a onClick={this.onAccess.bind(this)}><Translate content="footer.advanced_settings" /></a>
+                    <div style={{paddingTop: 15}}>
+                        <a onClick={this.onAccess.bind(this)}>
+                            <Translate content="footer.advanced_settings" />
+                        </a>
                     </div>
                 </div>
                 <div
@@ -381,7 +343,12 @@ class AltFooter extends Component {
         var wallet = WalletDb.getWallet();
         return (
             <AltContainer
-                stores={[CachedPropertyStore, BlockchainStore, WalletDb, SettingsStore]}
+                stores={[
+                    CachedPropertyStore,
+                    BlockchainStore,
+                    WalletDb,
+                    SettingsStore
+                ]}
                 inject={{
                     defaults: () => {
                         return SettingsStore.getState().defaults;
@@ -389,11 +356,15 @@ class AltFooter extends Component {
                     apiLatencies: () => {
                         return SettingsStore.getState().apiLatencies;
                     },
-                    currentNode: () => { 
-                        return SettingsStore.getState().settings.get("apiServer");
+                    currentNode: () => {
+                        return SettingsStore.getState().settings.get(
+                            "apiServer"
+                        );
                     },
                     activeNode: () => {
-                        return SettingsStore.getState().settings.get("activeNode");
+                        return SettingsStore.getState().settings.get(
+                            "activeNode"
+                        );
                     },
                     backup_recommended: () =>
                         wallet &&
