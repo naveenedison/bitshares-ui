@@ -390,7 +390,7 @@ class Header extends React.Component {
 
         let tradeUrl = this.props.lastMarket
             ? `/market/${this.props.lastMarket}`
-            : "/market/USD_BTS";
+            : "/market/USD_BTC";
 
         // Account selector: Only active inside the exchange
         let account_display_name, accountsList;
@@ -983,40 +983,7 @@ class Header extends React.Component {
                                     />
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    style={{flexFlow: "row"}}
-                                    className={cnames(
-                                        active.indexOf("explorer") !== -1
-                                            ? null
-                                            : "column-hide-xs",
-                                        {
-                                            active:
-                                                active.indexOf("explorer") !==
-                                                -1
-                                        }
-                                    )}
-                                    onClick={this._onNavigate.bind(
-                                        this,
-                                        "/explorer/blocks"
-                                    )}
-                                >
-                                    <Icon
-                                        size="2x"
-                                        style={{
-                                            position: "relative",
-                                            top: 0,
-                                            left: -8
-                                        }}
-                                        name="server"
-                                    />
-                                    <Translate
-                                        className="column-hide-small"
-                                        component="span"
-                                        content="header.explorer"
-                                    />
-                                </a>
-                            </li>
+
                             {!!createAccountLink ? null : (
                                 <li className="column-hide-small">
                                     <a
