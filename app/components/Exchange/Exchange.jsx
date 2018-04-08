@@ -1885,7 +1885,28 @@ class Exchange extends React.Component {
                         style={{paddingTop: 0, minWidth: 358, maxWidth: 400}}
                     >
                         {/* Market History */}
-
+                        {/* edit one */}
+                        <div className="grid-block no-padding no-margin vertical">
+                            <MyMarkets
+                                className="left-order-book no-padding no-overflow"
+                                headerStyle={{paddingTop: 0}}
+                                columns={[
+                                    {name: "star", index: 1},
+                                    {name: "market", index: 2},
+                                    {name: "vol", index: 3},
+                                    {name: "price", index: 4},
+                                    {name: "change", index: 5}
+                                ]}
+                                findColumns={[
+                                    {name: "market", index: 1},
+                                    {name: "issuer", index: 2},
+                                    {name: "vol", index: 3},
+                                    {name: "add", index: 4}
+                                ]}
+                                current={`${quoteSymbol}_${baseSymbol}`}
+                            />
+                        </div>
+                        {/* edit one */}
                         <div
                             style={{
                                 padding: !this.props.miniDepthChart
@@ -1894,6 +1915,19 @@ class Exchange extends React.Component {
                             }}
                             className="grid-block no-margin vertical shrink"
                         >
+                            {/*second edit */}
+                            {/* <div
+                                onClick={this._toggleMiniChart.bind(this)}
+                                className="exchange-content-header clickable"
+                                style={{textAlign: "left", paddingRight: 10}}
+                            >
+                                {this.props.miniDepthChart ? (
+                                    <span>&#9660;</span>
+                                ) : (
+                                    <span>&#9650;</span>
+                                )}
+                            </div> */}
+                            {/* second edit */}
                             {this.props.miniDepthChart ? (
                                 <DepthHighChart
                                     marketReady={marketReady}
@@ -1912,6 +1946,7 @@ class Exchange extends React.Component {
                                     invertedCalls={invertedCalls}
                                     totalBids={totals.bid}
                                     totalAsks={totals.ask}
+                                    z
                                     base={base}
                                     quote={quote}
                                     height={200}

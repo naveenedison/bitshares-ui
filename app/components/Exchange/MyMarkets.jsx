@@ -129,7 +129,89 @@ class MarketGroup extends React.Component {
             return null;
         }
 
-        let headers = columns.map(header => {});
+        {
+            /* edit one */
+        }
+        let headers = columns.map(header => {
+            switch (header.name) {
+                case "market":
+                    return (
+                        <th
+                            key={header.name}
+                            className="clickable"
+                            onClick={this._changeSort.bind(this, "name")}
+                        >
+                            <Translate content="exchange.market" />
+                        </th>
+                    );
+
+                case "vol":
+                    return (
+                        <th
+                            key={header.name}
+                            className="clickable"
+                            onClick={this._changeSort.bind(this, "volume")}
+                            style={{textAlign: "right"}}
+                        >
+                            <Translate content="exchange.vol_short" />
+                        </th>
+                    );
+
+                case "price":
+                    return (
+                        <th key={header.name} style={{textAlign: "right"}}>
+                            <Translate content="exchange.price" />
+                        </th>
+                    );
+
+                case "quoteSupply":
+                    return (
+                        <th key={header.name}>
+                            <Translate content="exchange.quote_supply" />
+                        </th>
+                    );
+
+                case "baseSupply":
+                    return (
+                        <th key={header.name}>
+                            <Translate content="exchange.base_supply" />
+                        </th>
+                    );
+
+                case "change":
+                    return (
+                        <th
+                            key={header.name}
+                            className="clickable"
+                            onClick={this._changeSort.bind(this, "change")}
+                            style={{textAlign: "right"}}
+                        >
+                            <Translate content="exchange.change" />
+                        </th>
+                    );
+
+                case "issuer":
+                    return (
+                        <th key={header.name}>
+                            <Translate content="explorer.assets.issuer" />
+                        </th>
+                    );
+
+                case "add":
+                    return (
+                        <th key={header.name} style={{textAlign: "right"}}>
+                            <Translate content="account.perm.confirm_add" />
+                        </th>
+                    );
+
+                default:
+                    return <th key={header.name} />;
+            }
+        });
+
+        {
+            /*   edit one   */
+        }
 
         let index = 0;
 
@@ -218,6 +300,27 @@ class MarketGroup extends React.Component {
                         }
                 }
             });
+
+        /* edit two */
+
+        let caret = open ? <span>&#9660;</span> : <span>&#9650;</span>;
+
+        return (
+            <div style={{paddingRight: 10}}>
+                {open ? (
+                    <table className="table table-hover text-right">
+                        <thead>
+                            <tr>{headers}</tr>
+                        </thead>
+                        {marketRows && marketRows.length ? (
+                            <tbody>{marketRows}</tbody>
+                        ) : null}
+                    </table>
+                ) : null}
+            </div>
+        );
+
+        /* edit two */
     }
 }
 
@@ -687,6 +790,33 @@ class MyMarkets extends React.Component {
 
         return (
             <div className={this.props.className} style={this.props.style}>
+                {/* edit three */}
+                <div
+                    style={this.props.headerStyle}
+                    className="grid-block shrink left-orderbook-header bottom-header"
+                >
+                    <div
+                        ref="myMarkets"
+                        className={starClass}
+                        onClick={this._changeTab.bind(this, "my-market")}
+                        data-intro={translator.translate(
+                            "walkthrough.my_markets_tab"
+                        )}
+                    >
+                        <Translate content="exchange.market_name" />
+                    </div>
+                    <div
+                        className={allClass}
+                        onClick={this._changeTab.bind(this, "find-market")}
+                        data-intro={translator.translate(
+                            "walkthrough.find_markets_tab"
+                        )}
+                    >
+                        <Translate content="exchange.more" />
+                    </div>
+                </div>
+                {/* edit three */}
+
                 {this.props.controls ? (
                     <div
                         className="small-12 medium-6"
@@ -700,6 +830,163 @@ class MyMarkets extends React.Component {
                         {/* {!myMarketTab ? <input type="text" value={this.state.inputValue} onChange={this._lookupAssets.bind(this)} placeholder="SYMBOL:SYMBOL" /> : null} */}
                     </div>
                 ) : null}
+
+                {/* edit four */}
+
+                {myMarketTab ? (
+                    <div
+                        className="grid-block shrink"
+                        style={{
+                            width: "100%",
+                            textAlign: "left",
+                            padding: "0.75rem 0.5rem"
+                        }}
+                    >
+                        <label style={{margin: "3px 0 0"}}>
+                            <input
+                                style={{position: "relative", top: 3}}
+                                className="no-margin"
+                                type="checkbox"
+                                checked={this.props.onlyStars}
+                                onChange={() => {
+                                    MarketsActions.toggleStars();
+                                }}
+                            />
+                            <span style={{paddingLeft: "0.4rem"}}>
+                                <TranslateWithLinks
+                                    string="exchange.show_only_star_formatter"
+                                    keys={[
+                                        {
+                                            type: "icon",
+                                            value: "fi-star",
+                                            className: "gold-star",
+                                            arg: "star_icon"
+                                        }
+                                    ]}
+                                />
+                            </span>
+                        </label>
+                        <div
+                            className="float-right search-wrapper"
+                            style={{paddingLeft: 20}}
+                        >
+                            <form>
+                                <input
+                                    autoComplete="off"
+                                    style={{
+                                        fontSize: "0.9rem",
+                                        height: "inherit",
+                                        position: "relative",
+                                        top: 1,
+                                        padding: 2
+                                    }}
+                                    type="text"
+                                    className="no-margin market-filter-input"
+                                    placeholder={counterpart.translate(
+                                        "exchange.filter"
+                                    )}
+                                    maxLength="16"
+                                    name="focus"
+                                    required="required"
+                                    value={this.state.myMarketFilter}
+                                    onChange={this.handleSearchUpdate}
+                                />
+                                <button
+                                    className="clear-text"
+                                    type="reset"
+                                    onClick={this.clearInput}
+                                />
+                            </form>
+                        </div>
+                    </div>
+                ) : (
+                    <div
+                        style={{
+                            width: "100%",
+                            textAlign: "left",
+                            padding: "0.75rem 0.5rem"
+                        }}
+                    >
+                        <table>
+                            <tbody>
+                                <tr style={{width: "100%"}}>
+                                    <td>
+                                        <AssetSelector
+                                            onAssetSelect={this._onFoundBaseAsset.bind(
+                                                this
+                                            )}
+                                            assets={defaultBases}
+                                            onChange={this._onInputBaseAsset.bind(
+                                                this
+                                            )}
+                                            asset={this.state.findBaseInput}
+                                            assetInput={
+                                                this.state.findBaseInput
+                                            }
+                                            tabIndex={1}
+                                            style={{
+                                                width: "100%",
+                                                paddingBottom: "1.5rem"
+                                            }}
+                                            onFound={this._onFoundBaseAsset.bind(
+                                                this
+                                            )}
+                                            label="exchange.quote"
+                                            noLabel
+                                            inputStyle={{fontSize: "0.9rem"}}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr style={{width: "100%"}}>
+                                    <td>
+                                        <label>
+                                            <Translate content="account.user_issued_assets.name" />:
+                                        </label>
+                                        <input
+                                            style={{
+                                                fontSize: "0.9rem",
+                                                position: "relative",
+                                                top: 1
+                                            }}
+                                            type="text"
+                                            value={this.state.inputValue}
+                                            onChange={this._onInputName.bind(
+                                                this
+                                            )}
+                                            placeholder={counterpart.translate(
+                                                "exchange.search"
+                                            )}
+                                            maxLength="16"
+                                            tabIndex={2}
+                                        />
+                                        {this.state.assetNameError ? (
+                                            <div
+                                                className="error-area"
+                                                style={{paddingTop: 10}}
+                                            >
+                                                <span
+                                                    style={{
+                                                        wordBreak: "break-all"
+                                                    }}
+                                                >
+                                                    <Translate
+                                                        content="explorer.asset.invalid"
+                                                        name={
+                                                            this.state
+                                                                .inputValue
+                                                        }
+                                                    />
+                                                </span>
+                                            </div>
+                                        ) : null}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+
+                {/* edit four */}
 
                 <ul className="mymarkets-tabs">
                     {preferredBases.map((base, index) => {
