@@ -1944,8 +1944,8 @@ class Exchange extends React.Component {
                                     }
                                     settles={marketSettleOrders}
                                     invertedCalls={invertedCalls}
-                                    totalBids={totals.bid}
-                                    totalAsks={totals.ask}
+                                    totalBids={10}
+                                    totalAsks={5}
                                     z
                                     base={base}
                                     quote={quote}

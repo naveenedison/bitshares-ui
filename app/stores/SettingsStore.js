@@ -7,7 +7,7 @@ import ls from "common/localStorage";
 import {Apis} from "bitsharesjs-ws";
 import {settingsAPIs} from "api/apiConfig";
 
-const CORE_ASSET = "BTS"; // Setting this to BTS to prevent loading issues when used with BTS chain which is the most usual case currently
+const CORE_ASSET = "BTC"; // Setting this to BTS to prevent loading issues when used with BTS chain which is the most usual case currently
 
 const STORAGE_KEY = "__graphene__";
 let ss = new ls(STORAGE_KEY);
@@ -177,67 +177,69 @@ class SettingsStore {
             // Default markets setup
             let topMarkets = {
                 markets_4018d784: [
-                    // BTS MAIN NET
-                    "OPEN.MKR",
-                    "BTS",
-                    "OPEN.ETH",
-                    "ICOO",
                     "BTC",
-                    "OPEN.LISK",
-                    "BKT",
-                    "OPEN.STEEM",
-                    "OPEN.GAME",
-                    "OCT",
-                    "USD",
-                    "CNY",
-                    "BTSR",
-                    "OBITS",
-                    "OPEN.DGD",
-                    "EUR",
-                    "GOLD",
-                    "SILVER",
-                    "IOU.CNY",
-                    "OPEN.DASH",
-                    "OPEN.USDT",
-                    "OPEN.EURT",
-                    "OPEN.BTC",
-                    "CADASTRAL",
-                    "BLOCKPAY",
-                    "BTWTY",
-                    "OPEN.INCNT",
-                    "KAPITAL",
-                    "OPEN.MAID",
-                    "OPEN.SBD",
-                    "OPEN.GRC",
-                    "YOYOW",
-                    "HERO",
-                    "RUBLE",
-                    "SMOKE",
-                    "STEALTH",
-                    "BRIDGE.BCO",
-                    "BRIDGE.BTC",
-                    "KEXCOIN",
-                    "PPY",
-                    "OPEN.EOS",
-                    "OPEN.OMG",
-                    "CVCOIN",
-                    "BRIDGE.ZNY",
-                    "BRIDGE.MONA",
-                    "OPEN.LTC",
-                    "GDEX.BTC",
-                    "GDEX.EOS",
-                    "GDEX.ETH",
-                    "GDEX.BTO",
-                    "WIN.ETH",
-                    "WIN.ETC",
-                    "WIN.HSR",
-                    "RUDEX.STEEM",
-                    "RUDEX.SBD",
-                    "RUDEX.KRM",
-                    "RUDEX.GBG",
-                    "RUDEX.GOLOS",
-                    "RUDEX.MUSE",
-                    "RUDEX.DCT"
+                    "ETH"
+                    // BTS MAIN NET
+                    // "OPEN.MKR",
+                    // "BTS",
+                    // "OPEN.ETH",
+                    // "ICOO",
+                    // "BTC",
+                    // "OPEN.LISK",
+                    // "BKT",
+                    // "OPEN.STEEM",
+                    // "OPEN.GAME",
+                    // "OCT",
+                    // "USD",
+                    // "CNY",
+                    // "BTSR",
+                    // "OBITS",
+                    // "OPEN.DGD",
+                    // "EUR",
+                    // "GOLD",
+                    // "SILVER",
+                    // "IOU.CNY",
+                    // "OPEN.DASH",
+                    // "OPEN.USDT",
+                    // "OPEN.EURT",
+                    // "OPEN.BTC",
+                    // "CADASTRAL",
+                    // "BLOCKPAY",
+                    // "BTWTY",
+                    // "OPEN.INCNT",
+                    // "KAPITAL",
+                    // "OPEN.MAID",
+                    // "OPEN.SBD",
+                    // "OPEN.GRC",
+                    // "YOYOW",
+                    // "HERO",
+                    // "RUBLE",
+                    // "SMOKE",
+                    // "STEALTH",
+                    // "BRIDGE.BCO",
+                    // "BRIDGE.BTC",
+                    // "KEXCOIN",
+                    // "PPY",
+                    // "OPEN.EOS",
+                    // "OPEN.OMG",
+                    // "CVCOIN",
+                    // "BRIDGE.ZNY",
+                    // "BRIDGE.MONA",
+                    // "OPEN.LTC",
+                    // "GDEX.BTC",
+                    // "GDEX.EOS",
+                    // "GDEX.ETH",
+                    // "GDEX.BTO",
+                    // "WIN.ETH",
+                    // "WIN.ETC",
+                    // "WIN.HSR",
+                    // "RUDEX.STEEM",
+                    // "RUDEX.SBD",
+                    // "RUDEX.KRM",
+                    // "RUDEX.GBG",
+                    // "RUDEX.GOLOS",
+                    // "RUDEX.MUSE",
+                    // "RUDEX.DCT"
                 ],
                 markets_39f5e2ed: [
                     // TESTNET
@@ -249,11 +251,13 @@ class SettingsStore {
             let bases = {
                 markets_4018d784: [
                     // BTS MAIN NET
-                    "USD",
-                    "OPEN.BTC",
-                    "CNY",
-                    "BTS",
-                    "BTC"
+                    // "USD",
+                    // "OPEN.BTC",
+                    // "CNY",
+                    // "BTS",
+                    // "BTC"
+                    "BTC",
+                    "ETH"
                 ],
                 markets_39f5e2ed: [
                     // TESTNET
@@ -262,10 +266,10 @@ class SettingsStore {
             };
 
             let coreAssets = {
-                markets_4018d784: "BTS",
+                markets_4018d784: "BTC",
                 markets_39f5e2ed: "TEST"
             };
-            let coreAsset = coreAssets[this.starredKey] || "BTS";
+            let coreAsset = coreAssets[this.starredKey] || "BTC";
             this.defaults.unit[0] = coreAsset;
 
             let chainBases = bases[this.starredKey] || bases.markets_4018d784;

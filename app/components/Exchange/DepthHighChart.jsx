@@ -430,9 +430,11 @@ class DepthHighChart extends React.Component {
         if (this.props.noFrame) {
             return (
                 <div className="grid-content no-overflow no-padding">
-                    {!flatBids.length &&
-                    !flatAsks.length &&
-                    !flatCalls.length ? (
+                    {!(
+                        !flatBids.length &&
+                        !flatAsks.length &&
+                        !flatCalls.length
+                    ) ? (
                         <span className="no-data">
                             <Translate content="exchange.no_data" />
                         </span>
@@ -455,7 +457,7 @@ class DepthHighChart extends React.Component {
                             {quoteSymbol}
                         </p>
                     )}
-                    {flatBids || flatAsks || flatCalls ? (
+                    {!(flatBids || flatAsks || flatCalls) ? (
                         <ReactHighstock config={config} />
                     ) : null}
                 </div>

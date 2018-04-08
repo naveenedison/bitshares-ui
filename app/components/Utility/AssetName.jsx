@@ -103,7 +103,7 @@ class AssetName extends React.Component {
                     data-place={this.props.dataPlace}
                     data-html={true}
                 >
-                    <span className="asset-prefix-replaced">{prefix}</span>
+                    {/* <span className="asset-prefix-replaced">{prefix}</span> */}
                     <span>{replacedName}</span>
                 </div>
             );

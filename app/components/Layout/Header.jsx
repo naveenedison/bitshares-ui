@@ -1208,7 +1208,7 @@ class Header extends React.Component {
                                     )}
                                     onClick={this._onNavigate.bind(
                                         this,
-                                        tradeUrl
+                                        "market/ETH_BTC"
                                     )}
                                 >
                                     <div className="table-cell">
